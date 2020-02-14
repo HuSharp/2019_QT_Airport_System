@@ -1,0 +1,3017 @@
+
+Skip to content
+拉取请求
+问题
+广场
+探索
+@Ahu-code
+Learn Git and GitHub without any code!
+
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+Ahu-code /
+2019_Qt_AirportSystem
+
+1
+1
+
+    0
+
+Code
+Issues 0
+Pull requests 0
+Actions
+Projects 1
+Wiki
+Security
+Insights
+Settings
+2019_Qt_AirportSystem/include catalogue.docx
+@Ahu-code Ahu-code Create include catalogue.docx 1008781 6 days ago
+2987 lines (2544 sloc) 82.1 KB
+#高级程序设计
+目录
+
+第1章  系统描述	..4
+1.1  系统名称	4
+ 1.2  系统要求	4
+1.3    函数要求	4
+第2章  功能模块结构	5
+2.1  登录界面	5
+2.1.1  账号密码的验证	5
+2.1  用户界面	5
+2.1  管理员界面	6
+2.1  航线信息界面	7
+第3章  主要模块的算法说明	8
+3.1  登录界面设计	8
+        3.2  用户界面设计	8
+3.2.1  航班信息的查询	8
+3.2.2  航班的订票/退票	8
+3.2.3 个人信息的更改	8
+        3.3 管理员界面设计	9
+3.3.1  总航班信息的更改	9
+3.3.2  航班订票客户的信息查看	9
+3.3.3 各航班信息的增删	9
+第4章  运行结果	10
+4.1  登录界面	10
+        4.2  用户界面	11
+4.2.1  航班信息的查询	12
+4.2.2  航班的订票/退票	12
+4.2.3 个人信息的更改	12
+        4.3 管理员界面	13
+4.3.1  总航班信息的更改	13
+4.3.2  航班订票客户的信息查看	13
+4.3.3 各航班信息的增删	13
+第5章  课程设计总结	13
+        5.1  遇到问题	14
+5.1.1  关于ui界面的设计	14
+5.1.2  关于实现多个窗口的切换显示	14
+5.1.3  关于icon的设计	14
+5.1.4  关于sqlite的建立与说明	15
+        5.2  结语	15
+第6章 参考文献	16
+第7章 附录	17
+        7.1  航空系统附录	17
+        7.2  基础题附录	68
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+一、	系统描述：分析和描述系统的基本要求和内容；
+1.	系统名称:Ahu#的航空管理系统
+2.	系统要求：
+（1）设计每条航线所涉及的信息，如终点站名、航班号、飞机号、飞机周日（星期几）、乘员定额、余票量、订定票的客户名单（包括姓名、订票量、舱位等级1，2或3）等；
+（2）结合基本操作的单链表、队列、二叉树等数据结构以及排序算法，设计机票系统的查询、订票、退票等功能；
+（3）设计并实现人机交互友好的界面或菜单。
+3.	函数要求：
+（1）编写函数，实现输入一组元素，建立一个带头结点的单链表；对该链表进行非递减排序；实现在非递减有序链表中删除值为x的结点；
+（2）编写函数，采用链式存储和顺序存储实现队列的初始化、入队、出队操作；
+（3）编写函数，建立有序表，利用二叉排序树的插入算法建立二叉排序树；在以上二叉排序树中删除某一指定关键字元素；采用折半查找实现某一已知的关键字的查找(采用顺序表存储结构)
+（4）选用1-3的数据结构，编写程序实现下述五种算法：简单插入排序，冒泡排序，快速排序，归并排序，堆排序。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+二、	功能模块结构：包括如何划分功能模块，各功能模块之间的结构图，以及各模块的功能描述；
+1.	登录界面
+登录界面分为如下三种情况：
+1.	账号密码的验证
+2.	用户界面的登录
+3.	管理员界面的登录
+ 
+     //账户密码的验证
+        简单将用户名和密码设置为了固定的字符串
+2.	用户界面
+1.	航线查询：航线可通过地名，或者飞机号进行查询
+2.	航线查看：查看每条航线所涉及的信息，如终点站名、航班号、飞机号、飞机周日（星期几）、乘员定额、余票量、订定票的客户名单（包括姓名、订票量、舱位等级1，2或3）等；
+3.	订/退票
+
+ 
+
+3.	管理员界面
+1.航线查询：航线可通过地名，或者飞机号进行查询
+2.航线查看：查看每条航线所涉及的信息，如终点站名、航班号、飞机号、飞机周日（星期几）、乘员定额、余票量、订定票的客户名单（包括姓名、订票量、舱位等级1，2或3）等；
+3.订/退票
+4.对航线进行增减
+5. 对航线进行编辑
+ 
+4.航线信息界面
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+三、	主要模块的算法说明：即实现该模块的思路；
+1，	登录界面
+1.	在弹出对话框中填写用户名和密码，按下登录按钮，如果用户名和密码均正确则进入主窗口，如果有错则弹出警告对话框。
+2.	新建Qt Widgets Application，项目名称为LoginDialog，类名和基类保持MainWindow和QMainWindow不变。
+3.	完成项目创建后，向项目中添加新的Qt设计师界面类，模板选择Dialog without Buttons，类名更改为LoginDialog。完成后向界面上添加两个标签Label、两个行编辑器Line Edit和两个按钮Push Button，并改名为usrEdit与passEdit。
+4.	右击登录按钮，在弹出的菜单中选择“转到槽…”，然后选择clicked()信号并确定。转到相应的槽以后，添加函数调用。
+5.	这时运行程序，按下退出按钮会退出程序，按下登录按钮会关闭登录对话框，并显示主窗口。
+
+
+2，	用户界面设计
+1.	左侧的地域树，因为都是固定信息，直接用一个QTreeWidget在UI设计器把内容填好了。
+2.	中间表格使用QTableView来显示记录。
+3.	数据使用程序目录下的.db文件，使用sqlite，进行左上角文件打开与保存。
+4.	关键字的过滤需要把所有列的内容都匹配识别。
+5.	窗口高度刚好把地域全部覆盖，省得拖滚动条；
+6.	三种过滤方式：点击tree里的节点按地域过滤、在筛选的combobox里按单位类型过滤、在搜索里按关键字过滤；
+7.	双击一行进行修改，但不能对航班信息进行修改，只能对自己信息进行录入更改；
+
+
+3，	管理员界面设计
+1.	左侧的地域树，因为都是固定信息，直接用一个QTreeWidget在UI设计器把内容填好了。
+2.	中间表格使用QTableView来显示记录。
+3.	数据使用程序目录下的.db文件，使用sqlite，进行左上角文件打开与保存。
+4.	关键字的过滤需要把所有列的内容都匹配识别。
+5.	窗口高度刚好把地域全部覆盖，省得拖滚动条；
+6.	三种过滤方式：点击tree里的节点按地域过滤、在筛选的combobox里按单位类型过滤、在搜索里按关键字过滤；
+7.	点按钮增加、删除记录；
+8.	双击一行进行修改，可以修改航班信息，包括终点站名、航班号、飞机号、飞机周日（星期几）、乘员定额、余票量、订定票的客户名单（包括姓名、订票量、舱位等级1，2或3）等；
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+四、	运行结果：包括典型的界面、输入和输出数据等；
+1.登录界面
+ 
+ 
+
+
+
+
+
+
+
+2.用户界面
+ 
+#用户航班信息查看与更改
+ 3.管理员界面
+#主要多了增加与删除界面
+ 
+#增加
+ 
+
+#删除
+ 
+#通过左侧地名查询（如点击广东）
+ 
+
+五、	课程设计总结：包括课程设计中遇到的问题，解决问题的过程及体会、课程设计的收获、对程序开发的认识与思考等。
+
+1.	关于ui界面的设计：
+ 我们需要提示标签来指明输入的数据，也需要输入框来接收用户的输入，QLabel与QLineEdit可以满足我们的要求。QLabel，QLineEdit有方法setText(“内容”)来改变其显示的文字，有方法setGeometry (起始横坐标，起始纵坐标，宽， 高)来设置左上角起始位置与大小。
+当然这些都可以在Qt Designer中直接设置。
+
+2.	关于实现多个窗口的切换显示。
+程序要实现的功能是：运行开始出现一个对话框，按下登录主界面按钮后该对话框消失并进入主窗口，如果直接关闭这个对话框，便不能进入主窗口，整个程序也将退出。进入主窗口后，按下显示对话框按钮，会弹出一个对话框，无论如何关闭这个对话框，都会回到主窗口。
+  程序里先建立一个工程，设计主界面，然后再建立一个对话框类，将其加入工程中，并在程序中调用自己新建的对话框类来实现多窗口。
+
+
+3.	关于icon的设计
+Qt中可以使用资源文件将各种类型的文件添加到最终生成的可执行文件中，这样就可以避免使用外部文件而出现的一些问题。而且，在编译时Qt还会将资源文件进行压缩，我们可能发现生成的可执行文件比我们添加到其中的资源文件还要小。
+添加完文件后会自动打开该资源文件，需要先添加前缀，点击“添加”按钮，然后选择“添加前缀”，默认的前缀是“/new/prefix1”，这个可以随意修改（不要出现中文字符），我们这里因为要添加图片，所以修改为“/myimages”。然后再按下添加按钮来添加文件，这里最好将所有要用到的图片放到项目目录中。比如这里在项目目录中新建了一个images文件夹，然后将需要的图标文件粘贴进去。添加完文件后，如下图所示。
+
+
+
+4.	关于sqlite的建立与说明
+在这个头文件中我们添加了一个建立连接的函数，使用这个头文件的目的就是要简化主函数中的内容。这里先创建了一个SQLite数据库的默认连接，设置数据库名称时使用了“:memory:”，表明这个是建立在内存中的数据库，也就是说该数据库只在程序运行期间有效，等程序运行结束时就会将其销毁。当然，大家也可以将其改为一个具体的数据库名称，比如“my.db”，这样就会在项目目录中创建该数据库文件了。
+
+
+5.	总结：
+一开始选择使用Qt，是由于实验要求良好的人机交互界面，由于听说Qt的ui设计更为人性化且能进行信号与槽的嵌入，用QT开发应用比较好，而且是跨平台，还可以支持嵌入式，会了QT既可以开发应用程序，还可以用于嵌入式开发，一举两得。于是选择了对Qt进行相关学习。通过这次基于Qt的程序设计，我能熟练地掌握Qt语言，掌握到Qt的重要性，学习Qt能让我深刻的知道在以后的工作中能用到ui的美工设计， 且能让我们锻炼自己的编程能力，还能处理许多别的语言处理不了的东西。学习Qt不仅能提高自己的认识，还巩固了对原来学过的其他语言的学习。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+六、	参考文献
+1.	《Qt Creator快速入门》  作者：霍亚飞
+2.	《Qt5编程入门》  作者：霍亚飞
+3.	官方书籍  《C++ GUI Qt4编程》
+4.	CSDN网站
+5.	Qt5——从零开始的学生管理系统
+Qt教程——从零开始的学生管理系统（文件）
+https://www.cnblogs.com/suvvm/p/10723449.html
+6.	Qt快速入门系列教程目录
+http://www.qter.org/forum.php?mod=viewthread&tid=193&highlight=%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+七、	附录：包括主要程序清单，要有适当的注释，使程序容易阅读。
+
+/*************************************************************************/
+mainwindow.h
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <QMainWindow>
+#include <QSortFilterProxyModel>
+#include <QStandardItemModel>
+#include <QTreeWidget>
+#include <QVector>
+#include "dlgitem.h"
+
+namespace Ui {
+class MainWindow;
+}
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+
+    void _MenuInit();
+
+    void _ModeInit();
+    void _TableInit();
+    void _AddSomeThing(Customer* item);
+    void _Todata();
+
+    void _ToSQL(QString _Tofile);
+    void _SaveSQL(QString _Tofile);
+    void _ToInsertSQL(Customer* item);
+    void _ToDeleteSQL(QString name);
+
+private slots:
+    void _ToOpen(bool checked);
+    void _ToSave(bool checked);
+
+    void on_btnSearch_clicked();        //搜索按钮，关键字过滤
+    void on_btnAdd_clicked();           //添加
+    void on_btnDelete_clicked();        //删除
+
+    void slot_AddSomeThing(Customer* item);   //DlgItem里添加记录后需要不关闭对话框，因此发个信号
+    void on_comboBox_currentTextChanged(const QString &arg1);   //按单位类别过滤
+    void on_treeWidget_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous); //改变选择区域
+    void on_tableView_doubleClicked(const QModelIndex &index);  //数据一行双击修改
+
+    void on_pushButton_clicked();
+
+private:
+    QString Type2String(int type);
+    QString Area2String(int area);
+    QString Province2String(int province);
+    Customer* FindItem(QString name);
+    void DeleteItem(QString name);
+
+private:
+    Ui::MainWindow *ui;
+    QString mDefaultDB;         //db文件路径
+    QStandardItemModel* mModel; //tableview的model
+    QVector<Customer*> mItems;  //所有客户数据
+
+    QStringList mAllType;       //所有单位类型
+    QStringList mAllArea;       //所有区域
+    QStringList mAllProvince;   //所有省份
+
+    QString mFilterType;        //单位类型过滤
+    QString mFilterArea;        //地域过滤
+    QString mFilterProvince;    //省份过滤
+    QString mFilterKey;         //关键字过滤
+};
+
+#endif // MAINWINDOW_H
+
+
+/*************************************************************************/
+dlgitem.h
+#ifndef DLGITEM_H
+#define DLGITEM_H
+
+#include <QDialog>
+
+namespace Ui {
+class DlgItem;
+}
+
+typedef struct _Customer{
+    QString name;
+    int type;
+    int area;
+    int province;
+    QString city;
+    QString feijiihao;
+    QString site;
+    QString contact;
+    QString buy;
+    QString _airban;
+    QString _air;
+}Customer,*PCustomer;
+
+class DlgItem : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit DlgItem(Customer* item,QWidget *parent = 0);
+    ~DlgItem();
+
+signals:
+    void sig_AddSomeThing(Customer*);
+
+private slots:
+    void on_btnAdd_clicked();
+    void on_btnCancel_clicked();
+    void on_combo2_currentTextChanged(const QString &arg1);
+    void on_edit1_textChanged(const QString &arg1);
+
+private:
+    int String2Province(QString s);
+    QString Province2String(int province);
+
+private:
+    Ui::DlgItem *ui;
+    Customer* mItem;
+};
+
+#endif // DLGITEM_H
+
+/*************************************************************************/
+logindialog.h
+#ifndef LOGINDIALOG_H
+#define LOGINDIALOG_H
+
+#include <QDialog>
+
+namespace Ui {
+class LoginDialog;
+}
+
+class LoginDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit LoginDialog(QWidget *parent = nullptr);
+    ~LoginDialog();
+
+private slots:
+    void on_loginBtn_clicked();
+
+
+    void on_exitBtn_clicked();
+
+    void on_usrLineEdit_cursorPositionChanged(int arg1, int arg2);
+
+    void on_pwdLineEdit_cursorPositionChanged(int arg1, int arg2);
+
+private:
+    Ui::LoginDialog *ui;
+};
+
+#endif // LOGINDIALOG_H
+
+/*************************************************************************/
+useritem.h
+#ifndef USERITEM_H
+#define USERITEM_H
+
+#include <QMainWindow>
+#include <QSortFilterProxyModel>
+#include <QStandardItemModel>
+#include <QTreeWidget>
+#include <QVector>
+#include "userticket.h"
+
+
+namespace Ui {
+class useritem;
+}
+
+class useritem : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit useritem(QWidget *parent = 0);
+    ~useritem();
+
+    void _MenuInit();
+
+    void _ModeInit();
+    void _TableInit();
+    void _AddSomeThing(Customer1* item);
+    void _Todata();
+
+    void _ToSQL(QString _Tofile);
+    void _SaveSQL(QString _Tofile);
+    void _ToInsertSQL(Customer1* item);
+    void _ToDeleteSQL(QString name);
+
+private slots:
+    void _ToOpen(bool checked);
+    void _ToSave(bool checked);
+
+    void on_btnSearch_clicked();        //搜索按钮，关键字过滤
+    void on_btnAdd_clicked();           //添加
+    void on_btnDelete_clicked();        //删除
+
+    void slot_AddSomeThing(Customer1* item);   //userticket里添加记录后需要不关闭对话框，因此发个信号
+    void on_comboBox_currentTextChanged(const QString &arg1);   //按单位类别过滤
+    void on_treeWidget_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous); //改变选择区域
+    void on_tableView_doubleClicked(const QModelIndex &index);  //数据一行双击修改
+
+    void on_pushButton_clicked();
+
+private:
+    QString Type2String(int type);
+    QString Area2String(int area);
+    QString Province2String(int province);
+    Customer1* FindItem(QString name);
+    void DeleteItem(QString name);
+
+private:
+    Ui::useritem *ui;
+    QString mDefaultDB;         //db文件路径
+    QStandardItemModel* mModel; //tableview的model
+    QVector<Customer1*> mItems;  //所有客户数据
+
+    QStringList mAllType;       //所有单位类型
+    QStringList mAllArea;       //所有区域
+    QStringList mAllProvince;   //所有省份
+
+    QString mFilterType;        //单位类型过滤
+    QString mFilterArea;        //地域过滤
+    QString mFilterProvince;    //省份过滤
+    QString mFilterKey;         //关键字过滤
+};
+
+#endif // useritem_H
+
+/*************************************************************************/
+userticket.h
+#ifndef USERTICKET_H
+#define USERTICKET_H
+
+#include <QDialog>
+
+
+namespace Ui {
+class userticket;
+}
+
+typedef struct Customer_{
+    QString name;
+    int type;
+    int area;
+    int province;
+    QString city;
+    QString feijiihao;
+    QString site;
+    QString airport;
+    QString buiness;
+    QString _airban;
+    QString _air;
+}Customer1,*PCustomer1;
+
+class userticket : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit userticket(Customer1* item,QWidget *parent = 0);
+    ~userticket();
+
+signals:
+    void sig_AddSomeThing(Customer1*);
+
+private slots:
+    void on_btnAdd_clicked();
+    void on_btnCancel_clicked();
+    void on_combo2_currentTextChanged(const QString &arg1);
+    void on_edit1_textChanged(const QString &arg1);
+
+private:
+    int String2Province(QString s);
+    QString Province2String(int province);
+
+private:
+    Ui::userticket *ui;
+    Customer1* mItem;
+};
+
+#endif // userticket_H
+/*************************************************************************/
+main.cpp
+#include "mainwindow.h"
+#include <QApplication>
+#include "logindialog.h"
+#include "airlogindialog.h"
+#include "connection.h"
+#include "useritem.h"
+
+extern int yonghu;
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+
+    if(!createConnection())
+        return 1;
+
+    MainWindow w;
+    useritem u;
+    AirLoginDialog ald;
+    LoginDialog dlg;
+
+    if (dlg.exec() == QDialog::Accepted && (yonghu==1 || yonghu==2))
+    {
+        if(yonghu==1){
+            w.show();
+            return a.exec();
+        }
+        if(yonghu==2){
+            u.show();
+            return a.exec();
+        }
+    }
+
+/*
+    if (dlg.exec() == QDialog::Accepted)
+    {
+       if(!createConnection())
+           return 1;
+
+       u.show();
+       return a.exec();
+    }
+ */
+
+    else return 0;
+
+    //return a.exec();
+}
+
+/*************************************************************************/
+dlgitem.cpp
+#include "dlgitem.h"
+#include "ui_dlgitem.h"
+
+DlgItem::DlgItem(Customer* item,QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DlgItem)
+{
+    ui->setupUi(this);
+
+    mItem = item;
+
+    QFont font( "Microsoft YaHei", 10, 75);
+    
+    for(int i=0;i<20;i++)
+    {
+        ui->tableWidget->setItem(i,0,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,1,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,2,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,3,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,4,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,5,new QTableWidgetItem(""));
+    }
+
+    on_combo2_currentTextChanged("华东");
+    if(mItem)
+    {
+        //修改
+        ui->btnAdd->setText("修改");
+
+        ui->edit1->setText(mItem->name);
+        ui->combo1->setCurrentIndex(mItem->type);
+        ui->combo2->setCurrentIndex(mItem->area);
+        on_combo2_currentTextChanged(ui->combo2->currentText());
+        ui->combo3->setCurrentText(Province2String(mItem->province));
+        ui->edit2->setText(mItem->city);
+        ui->edit3->setText(mItem->feijiihao);
+        ui->edit4->setText(mItem->site);
+        ui->textEdit->setText(mItem->buy);
+        ui->textEdit2->setText(mItem->_airban);
+        ui->textEdit3->setText(mItem->_air);
+
+        QStringList all = mItem->contact.split(";");
+        for(int i=0;i<all.size();i++)
+        {
+            QStringList row = all[i].split(",");
+            if(row.size() >= 6)
+            {
+                bool bRed = !row[5].isEmpty();
+                ui->tableWidget->item(i,0)->setText(row[0]);
+                ui->tableWidget->item(i,1)->setText(row[1]);
+                ui->tableWidget->item(i,2)->setText(row[2]);
+                ui->tableWidget->item(i,3)->setText(row[3]);
+                ui->tableWidget->item(i,4)->setText(row[4]);
+                ui->tableWidget->item(i,5)->setText(row[5]);
+                if(!row[5].isEmpty())
+                {
+                    ui->tableWidget->item(i,0)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,1)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,2)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,3)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,4)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,5)->setBackground(Qt::red);
+                }
+            }
+        }
+    }
+}
+
+DlgItem::~DlgItem()
+{
+    delete ui;
+}
+
+void DlgItem::on_btnAdd_clicked()
+{
+    if(ui->edit1->text().isEmpty())
+    {
+        ui->labelTip->setText("航班号名称不能为空!");
+        return;
+    }
+    Customer* p = new Customer;
+    p->name = ui->edit1->text();
+    p->type = ui->combo1->currentIndex();
+    p->area = ui->combo2->currentIndex();
+    p->province = String2Province(ui->combo3->currentText());
+    p->city = ui->edit2->text();
+    p->feijiihao = ui->edit3->text();
+    p->site = ui->edit4->text();
+    p->buy = ui->textEdit->toPlainText();
+    p->_airban = ui->textEdit2->toPlainText();
+    p->_air = ui->textEdit3->toPlainText();
+
+    QString sAll = "";
+    QString s = "";
+    int columns = ui->tableWidget->columnCount();
+    for(int i=0;i<ui->tableWidget->rowCount();i++)
+    {
+        if(ui->tableWidget->item(i,0)->text().isEmpty())
+        {
+            continue;
+        }
+        for(int j=0;j<columns;j++)
+        {
+            //,和;是用来分隔的标记，禁止用户输入这2个符号，如果不小心输了，程序也替换成空格
+            s = ui->tableWidget->item(i,j)->text();
+            s.replace(","," ");
+            s.replace(";"," ");
+            sAll += s;
+            if(j == columns-1)
+            {
+                sAll += ";";
+            }
+            else
+            {
+                sAll += ",";
+            }
+        }
+    }
+    p->contact = sAll;
+
+    if(mItem)
+    {
+        //修改
+       mItem->name = p->name;
+        mItem->type = p->type;
+        mItem->area = p->area;
+        mItem->province = p->province;
+        mItem->city = p->city;
+        mItem->feijiihao = p->feijiihao;
+        mItem->site = p->site;
+        mItem->contact = p->contact;
+        mItem->buy = p->buy;
+        mItem->_airban = p->_airban;
+        mItem->_air = p->_air;
+        accept();
+    }
+    else
+    {
+        //新增
+        emit sig_AddSomeThing(p);
+
+        ui->edit_1->setText("");
+        ui->edit_2->setText("");
+        ui->edit_3->setText("");
+        ui->edit_4->setText("");
+        ui->textEdit_1->setText("");
+        ui->textEdit_2->setText("");
+        ui->textEdit_3->setText("");
+        for(int i=0;i<20;i++)
+        {
+            ui->tableWidget->item(i,0)->setText("");
+            ui->tableWidget->item(i,1)->setText("");
+            ui->tableWidget->item(i,2)->setText("");
+            ui->tableWidget->item(i,3)->setText("");
+            ui->tableWidget->item(i,4)->setText("");
+            ui->tableWidget->item(i,5)->setText("");
+        }
+        ui->edit1->setFocus();
+        ui->labelTip->setText("增加成功!");
+    }
+
+}
+
+void DlgItem::on_btn_clicked()
+{
+    reject();
+}
+
+int DlgItem:: Province(QString s)
+{
+    QStringList AllProvince;
+    AllProvince<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建"
+                <<"广东"<<"广西"<<"海南"
+                <<"湖北"<<"湖南"<<"河南"<<"江西"
+                <<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙"
+                <<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江";
+    return AllProvince.indexOf(s);
+}
+
+QString DlgItem:: String(int n)
+{
+    QStringList AllProvince;
+    AllProvince<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建"
+                <<"广东"<<"广西"<<"海南"
+                <<"湖北"<<"湖南"<<"河南"<<"江西"
+                <<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙"
+                <<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江";
+    if(n>=0 && n<AllProvince.size())
+    {
+        return AllProvince[n];
+    }
+    return "";
+}
+
+void DlgItem::on_combo2_currentTextChanged(const QString &text)
+{
+    ui->combo3->clear();
+    if(text == "华东")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建");
+    }
+    else if(text == "华南")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"广东"<<"广西"<<"海南");
+    }
+    else if(text == "华中")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"湖北"<<"湖南"<<"河南"<<"江西");
+    }
+    else if(text == "华北")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙");
+    }
+    else if(text == "其他")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江");
+    }
+}
+
+void DlgItem::on_edit1_textChanged(const QString &arg1)
+{
+    ui->labelTip->setText("");
+}
+
+/*************************************************************************/
+mainwindow.cpp
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+#include <QListView>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QDebug>
+#include <QSortFilterProxyModel>
+#include "logindialog.h"
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    setWindowIcon(QIcon(":/myapp.ico"));
+
+    mDefaultDB = QCoreApplication::applicationDirPath() + "\\crm.db";
+    mAllType<<"国际航空"<<"南方航空"<<"海南航空"<<"长沙航空"<<"深圳航空"<<"东方航空"<<"厦门航空"<<"四川航空";
+    mAllArea<<"华东"<<"华南"<<"华中"<<"华北"<<"其他"<<"外";
+    mAllProvince<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建"
+                <<"广东"<<"广西"<<"海南"
+                <<"湖北"<<"湖南"<<"河南"<<"江西"
+                <<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙"
+                <<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江";
+    mFilterType = "";
+    mFilterArea = "";
+    mFilterProvince = "";
+    mFilterKey = "";
+
+    _MenuInit();
+
+    _ToSQL(mDefaultDB);
+    _TableInit();
+
+    ui->treeWidget->expandAll();
+    ui->treeWidget->setCurrentItem(ui->treeWidget->itemAt(0,0));
+
+    ui->comboBox->setView(new QListView());
+}
+
+MainWindow::~MainWindow()
+{
+    _Todata();
+    delete ui;
+}
+
+void MainWindow::_ModeInit()
+{
+    mModel->removeRows(0,mModel->rowCount());
+    for(int i=0;i<mItems.size();i++)
+    {
+        Customer* p = mItems[i];
+        QString sArea = Area2String(p->area);
+        QString sProvince = Province2String(p->province);
+        QString sType = Type2String(p->type);
+
+        //区域过滤
+        if(!mFilterArea.isEmpty())
+        {
+           if(mFilterArea != sArea)
+           {
+               continue;
+           }
+        }
+        //省份过滤
+        if(!mFilterProvince.isEmpty())
+        {
+           if(mFilterProvince != sProvince)
+           {
+               continue;
+           }
+        }
+        //单位类别过滤
+        if(!mFilterType.isEmpty())
+        {
+           if(mFilterType != sType)
+           {
+               continue;
+           }
+        }
+        //关键字过滤
+        if(!mFilterKey.isEmpty())
+        {
+            QStringList strs;
+            strs<<p->name<<sType<<sArea<<sProvince<<p->city<<p->site<<p->contact<<p->buy<<p->_airban<<p->_air;
+            bool bFind = false;
+            foreach (QString s, strs)
+            {
+                if(s.indexOf(mFilterKey) != -1)
+                {
+                    bFind = true;
+                    break;
+                }
+            }
+            if(!bFind)
+            {
+                continue;
+            }
+        }
+
+        QList<QStandardItem*> items;
+        QStandardItem* item1 = new QStandardItem(p->name);
+        QStandardItem* item2 = new QStandardItem(Type2String(p->type));
+        QStandardItem* item3 = new QStandardItem(Area2String(p->area));
+        QStandardItem* item4 = new QStandardItem(Province2String(p->province) );
+        QStandardItem* item5 = new QStandardItem(p->city);
+        QStandardItem* item6 = new QStandardItem(p->feijiihao);
+        QStandardItem* item7 = new QStandardItem(p->site);
+        QStandardItem* item8 = new QStandardItem(p->_airban);
+        QStandardItem* item9 = new QStandardItem(p->_air);
+        items.append(item1);
+        items.append(item2);
+        items.append(item3);
+        items.append(item4);
+        items.append(item5);
+        items.append(item6);
+        items.append(item7);
+        items.append(item8);
+        items.append(item9);
+        mModel->appendRow(items);
+    }
+}
+
+void MainWindow::_TableInit()
+{
+    QTableView* t = ui->tableView;
+    t->setEditTriggers(QTreeView::NoEditTriggers);			//不能编辑
+    t->setSelectionBehavior(QTreeView::SelectRows);			//一次选中整行
+    t->setAlternatingRowColors(true);
+
+    QString strTreeStyle = "QTableView::item {height: 25px}";
+    t->setStyleSheet(strTreeStyle);
+
+    QStringList headers;
+    headers<< QStringLiteral("航班号")<<QStringLiteral("航空公司")
+            << QStringLiteral("区域")<<QStringLiteral("省份")
+            << QStringLiteral("城市")<<QStringLiteral("出发时间")
+            << QStringLiteral("飞机号")<<QStringLiteral("乘员定额")
+            << QStringLiteral("备注");
+    mModel = new QStandardItemModel(t);
+    mModel->setHorizontalHeaderLabels( headers );
+
+    _ModeInit();
+    t->setModel(mModel);
+    for(int i=0;i<headers.size();i++)
+    {
+        if(i==0)
+        {
+            t->horizontalHeader()->resizeSection(i,200);
+        }
+        else if(i==1)
+        {
+            t->horizontalHeader()->resizeSection(i,80);
+        }
+        else if(i>=2 && i<=4)
+        {
+            t->horizontalHeader()->resizeSection(i,60);
+        }
+        else
+        {
+            t->horizontalHeader()->resizeSection(i,150);
+        }
+    }
+
+    QModelIndex rootIndex = t->rootIndex();
+    QModelIndex selIndex = mModel->index(0,0,rootIndex);
+    t->setCurrentIndex(selIndex);
+//    t->expandAll();
+}
+
+void MainWindow::_AddSomeThing(Customer *item)
+{
+    mItems.push_back(item);
+}
+
+void MainWindow::_Todata()
+{
+    for(int i=0;i<mItems.size();i++)
+    {
+        Customer* p = mItems[i];
+        if(p)
+        {
+            delete p;
+            p = NULL;
+        }
+    }
+    mItems.clear();
+}
+
+void MainWindow::_ToSQL(QString _Tofile)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(_Tofile);
+    if(db.open())
+    {
+        qDebug()<<"Database Opened";
+
+        mDefaultDB = _Tofile;
+
+        QSqlQuery sql_query;
+        QString select_all_sql = "select * from Customer";
+        //查询所有记录
+        sql_query.prepare(select_all_sql);
+        if(!sql_query.exec())
+        {
+            qDebug()<<sql_query.lastError();
+        }
+        else
+        {
+            while(sql_query.next())
+            {
+                Customer* p = new Customer;
+                p->name = sql_query.value(0).toString();
+                p->type = sql_query.value(1).toInt();
+                p->area = sql_query.value(2).toInt();
+                p->province = sql_query.value(3).toInt();
+                p->city = sql_query.value(4).toString();
+                p->feijiihao = sql_query.value(5).toString();
+                p->site = sql_query.value(6).toString();
+                p->contact = sql_query.value(7).toString();
+                p->buy = sql_query.value(8).toString();
+                p->_airban = sql_query.value(9).toString();
+                p->_air = sql_query.value(10).toString();
+                mItems.push_back(p);
+            }
+        }
+    }
+    db.close();
+}
+
+void MainWindow::_SaveSQL(QString _Tofile)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(_Tofile);
+    if(db.open())
+    {
+        qDebug()<<"Database Opened";
+
+        QSqlQuery sql_query;
+        QString create_sql = "create table if not exists Customer (name varchar(100) primary key, \
+                                                    type int ,\
+                                                    area int,\
+                                                    province int,\
+                                                    city varchar(20),\
+                                                    feijiihao varchar(100),\
+                                                    site varchar(200),\
+                                                    contact varchar(500),\
+                                                    buy varchar(200),\
+                                                    _airban varchar(100),\
+                                                    _air varchar(200))"; //创建数据表
+//        QString insert_sql = "insert into Customer values(\"公司1\",1,1,1,\"武汉\",\"武汉洪山区XXX\",\"www.xxx.com\",\"aaaaa\",\"bbbbb\",\"ccccc\",\"ddddd\")";    //插入数据
+        QString insert_sql = "insert into Customer values(\"%1\",%2,%3,%4,\"%5\",\"%6\",\"%7\",\"%8\",\"%9\",\"%10\",\"%11\")";    //插入数据
+        QString select_all_sql = "select * from Customer";
+
+        sql_query.prepare(create_sql); //创建表
+        if(!sql_query.exec()) //查看创建表是否成功
+        {
+            qDebug()<<QObject::tr("Table Create failed");
+            qDebug()<<sql_query.lastError();
+        }
+        else
+        {
+            qDebug()<< "Table Created" ;
+
+            for(int i=0;i<mItems.size();i++)
+            {
+                Customer* p = mItems[i];
+                QString sql = insert_sql;
+                sql.replace("%10",p->_airban);
+                sql.replace("%11",p->_air);
+                sql = sql.arg(p->name).arg(p->type).arg(p->area).arg(p->province).arg(p->city).arg(p->feijiihao).arg(p->site).arg(p->contact).arg(p->buy);
+                sql_query.prepare(sql);
+                if(!sql_query.exec())
+                {
+                    qDebug()<<sql_query.lastError();
+                }
+                else
+                {
+                    qDebug()<<"插入记录成功";
+                }
+            }
+        }
+    }
+    db.close();
+}
+
+void MainWindow::_ToInsertSQL(Customer *p)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(mDefaultDB);
+    if(db.open())
+    {
+        qDebug()<<"Database Opened";
+
+        QSqlQuery sql_query;
+        QString create_sql = "create table if not exists Customer (name varchar(100) primary key, \
+                                                    type int ,\
+                                                    area int,\
+                                                    province int,\
+                                                    city varchar(20),\
+                                                    feijiihao varchar(100),\
+                                                    site varchar(200),\
+                                                    contact varchar(500),\
+                                                    buy varchar(200),\
+                                                    _airban varchar(100),\
+                                                    _air varchar(200))"; //创建数据表
+        sql_query.prepare(create_sql);
+        sql_query.exec();                   //创建表
+
+        QString sql = "insert into Customer values(\"%1\",%2,%3,%4,\"%5\",\"%6\",\"%7\",\"%8\",\"%9\",\"%10\",\"%11\")";    //插入数据
+        sql.replace("%10",p->_airban);
+        sql.replace("%11",p->_air);
+        sql = sql.arg(p->name).arg(p->type).arg(p->area).arg(p->province).arg(p->city).arg(p->feijiihao).arg(p->site).arg(p->contact).arg(p->buy);
+        sql_query.prepare(sql);
+        if(!sql_query.exec())
+        {
+            qDebug()<<sql_query.lastError();
+        }
+        else
+        {
+            qDebug()<<"插入记录成功";
+        }
+    }
+    db.close();
+}
+
+void MainWindow::_ToDeleteSQL(QString name)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(mDefaultDB);
+    if(db.open())
+    {
+        qDebug()<<"Database Opened";
+
+        QSqlQuery sql_query;
+        QString sql = QString("delete from Customer where name='%1'").arg(name);
+        sql_query.prepare(sql);
+        if(!sql_query.exec())
+        {
+            qDebug()<<sql_query.lastError();
+        }
+        else
+        {
+            qDebug()<<"删除记录成功";
+        }
+    }
+    db.close();
+}
+
+void MainWindow::_ToOpen(bool checked)
+{
+    QString _Tofile = QFileDialog::getOpen_Tofile(this,"打开文件","","Database Files(*.db)");
+    if (_Tofile.isNull())
+    {
+        return;
+    }
+    if(_Tofile.indexOf(".db") != -1)
+    {
+        _Todata();
+        _ToSQL(_Tofile);
+        _TableInit();
+    }
+}
+
+void MainWindow::_ToSave(bool checked)
+{
+    QString _Tofile = QFileDialog::getSave_Tofile(this,"保存到文件","","Database Files(*.db)");
+    if (_Tofile.isNull())
+    {
+        return;
+    }
+    if(QFile::exists(_Tofile))
+    {
+        QFile::remove(_Tofile);
+    }
+    _SaveSQL(_Tofile);
+}
+
+void MainWindow::on_btnSearch_clicked()
+{
+    QString s = ui->lineEdit->text();
+    mFilterKey = s;
+    _ModeInit();
+}
+
+void MainWindow::on_btnAdd_clicked()
+{
+    DlgItem dlg(NULL);
+    connect(&dlg,&DlgItem::sig_AddSomeThing,this,MainWindow::slot_AddSomeThing);
+    dlg.exec();
+}
+
+void MainWindow::on_btnDelete_clicked()
+{
+//    int row = ui->treeView->currentIndex().row();
+    int row = ui->tableView->currentIndex().row();
+    QString name = mModel->item(row,0)->text();
+    DeleteItem(name);
+
+    mModel->removeRow(row);
+
+    _ToDeleteSQL(name);
+}
+
+void MainWindow::slot_AddSomeThing(Customer *p)
+{
+    mItems.push_back(p);
+
+    QList<QStandardItem*> items;
+    QStandardItem* item1 = new QStandardItem(p->name);
+    QStandardItem* item2 = new QStandardItem(Type2String(p->type));
+    QStandardItem* item3 = new QStandardItem(Area2String(p->area));
+    QStandardItem* item4 = new QStandardItem(Province2String(p->province) );
+    QStandardItem* item5 = new QStandardItem(p->city);
+    QStandardItem* item6 = new QStandardItem(p->feijiihao);
+    QStandardItem* item7 = new QStandardItem(p->site);
+    QStandardItem* item8 = new QStandardItem(p->_airban);
+    QStandardItem* item9 = new QStandardItem(p->_air);
+    items.append(item1);
+    items.append(item2);
+    items.append(item3);
+    items.append(item4);
+    items.append(item5);
+    items.append(item6);
+    items.append(item7);
+    items.append(item8);
+    items.append(item9);
+    mModel->appendRow(items);
+
+    _ToInsertSQL(p);
+}
+
+QString MainWindow::Type2String(int n)
+{
+    return mAllType[n];
+}
+
+QString MainWindow::Area2String(int n)
+{
+    return mAllArea[n];
+}
+
+QString MainWindow::Province2String(int n)
+{
+    if(n>=0 && n<mAllProvince.size() )
+    {
+        return mAllProvince[n];
+    }
+    return "";
+}
+
+Customer *MainWindow::FindItem(QString name)
+{
+    for(int i=0;i<mItems.size();i++)
+    {
+        if(mItems[i]->name == name)
+        {
+            return mItems[i];
+        }
+    }
+    return NULL;
+}
+
+void MainWindow::DeleteItem(QString name)
+{
+    for(int i=0;i<mItems.size();i++)
+    {
+        if(mItems[i]->name == name)
+        {
+            mItems.removeAt(i);
+            return;
+        }
+    }
+}
+
+void MainWindow::on_comboBox_currentTextChanged(const QString &text)
+{
+    if(text == "航空公司")
+    {
+        mFilterType = "";
+    }
+    else
+    {
+        mFilterType = text;
+    }
+    _ModeInit();
+}
+
+void MainWindow::on_treeWidget_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+    QString s = current->text(0);
+    if(s == "全部")
+    {
+        mFilterArea = "";
+        mFilterProvince = "";
+    }
+    else if(mAllArea.contains(s))
+    {
+        //区域
+        mFilterArea = s;
+        mFilterProvince = "";
+    }
+    else if(mAllProvince.contains(s))
+    {
+        //省份
+        mFilterArea = "";
+        mFilterProvince = s;
+    }
+    _ModeInit();
+}
+
+void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    QString name = mModel->item(index.row(),0)->text();
+    Customer *p = FindItem(name);
+    if(p)
+    {
+        DlgItem dlg(p);
+        if(QDialog::Accepted == dlg.exec())
+        {
+            mModel->item(index.row(),0)->setText(p->name);
+            mModel->item(index.row(),1)->setText(Type2String(p->type));
+            mModel->item(index.row(),2)->setText(Area2String(p->area));
+            mModel->item(index.row(),3)->setText(Province2String(p->province));
+            mModel->item(index.row(),4)->setText(p->city);
+            mModel->item(index.row(),5)->setText(p->feijiihao);
+            mModel->item(index.row(),6)->setText(p->site);
+            mModel->item(index.row(),7)->setText(p->_airban);
+            mModel->item(index.row(),8)->setText(p->_air);
+
+            _ToDeleteSQL(name);
+            _ToInsertSQL(p);
+        }
+    }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    LoginDialog *dlg = new LoginDialog;
+    dlg->show();
+    this->close();
+}
+
+/*************************************************************************/
+useitem.cpp
+#include "useritem.h"
+#include "ui_useritem.h"
+
+#include <QListView>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QDebug>
+#include <QSortFilterProxyModel>
+#include "logindialog.h"
+
+useritem::useritem(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::useritem)
+{
+    ui->setupUi(this);
+    setWindowIcon(QIcon(":/myapp.ico"));
+
+    mDefaultDB = QCoreApplication::applicationDirPath() + "\\crm.db";
+    mAllType<<"国际航空"<<"南方航空"<<"海南航空"<<"长沙航空"<<"深圳航空"<<"东方航空"<<"厦门航空"<<"四川航空";
+    mAllArea<<"华东"<<"华南"<<"华中"<<"华北"<<"其他"<<"外";
+    mAllProvince<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建"
+                <<"广东"<<"广西"<<"海南"
+                <<"湖北"<<"湖南"<<"河南"<<"江西"
+                <<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙"
+                <<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江";
+    mFilterType = "";
+    mFilterArea = "";
+    mFilterProvince = "";
+    mFilterKey = "";
+
+    _MenuInit();
+
+    _ToSQL(mDefaultDB);
+    _TableInit();
+
+    ui->treeWidget->expandAll();
+    ui->treeWidget->setCurrentItem(ui->treeWidget->itemAt(0,0));
+
+    ui->comboBox->setView(new QListView());
+}
+
+useritem::~useritem()
+{
+    _Todata();
+    delete ui;
+}
+
+void useritem::_MenuInit()
+{
+    QMenu *file = menuBar()->addMenu("&文件");
+    file->addAction("打开...",this,SLOT(_ToOpen(bool)));
+    file->addAction("保存",this,SLOT(_ToSave(bool)));
+}
+
+void useritem::_ModeInit()
+{
+    mModel->removeRows(0,mModel->rowCount());
+    for(int i=0;i<mItems.size();i++)
+    {
+        Customer1* p = mItems[i];
+        QString sArea = Area2String(p->area);
+        QString sProvince = Province2String(p->province);
+        QString sType = Type2String(p->type);
+
+        //区域过滤
+        if(!mFilterArea.isEmpty())
+        {
+           if(mFilterArea != sArea)
+           {
+               continue;
+           }
+        }
+        //省份过滤
+        if(!mFilterProvince.isEmpty())
+        {
+           if(mFilterProvince != sProvince)
+           {
+               continue;
+           }
+        }
+        //单位类别过滤
+        if(!mFilterType.isEmpty())
+        {
+           if(mFilterType != sType)
+           {
+               continue;
+           }
+        }
+        //关键字过滤
+        if(!mFilterKey.isEmpty())
+        {
+            QStringList strs;
+            strs<<p->name<<sType<<sArea<<sProvince<<p->city<<p->site<<p->contact<<p->buy<<p->_airban<<p->_air;
+            bool bFind = false;
+            foreach (QString s, strs)
+            {
+                if(s.indexOf(mFilterKey) != -1)
+                {
+                    bFind = true;
+                    break;
+                }
+            }
+            if(!bFind)
+            {
+                continue;
+            }
+        }
+
+        QList<QStandardItem*> items;
+        QStandardItem* item1 = new QStandardItem(p->name);
+        QStandardItem* item2 = new QStandardItem(Type2String(p->type));
+        QStandardItem* item3 = new QStandardItem(Area2String(p->area));
+        QStandardItem* item4 = new QStandardItem(Province2String(p->province) );
+        QStandardItem* item5 = new QStandardItem(p->city);
+        QStandardItem* item6 = new QStandardItem(p->feijiihao);
+        QStandardItem* item7 = new QStandardItem(p->site);
+        QStandardItem* item8 = new QStandardItem(p->_airban);
+        QStandardItem* item9 = new QStandardItem(p->_air);
+        items.append(item1);
+        items.append(item2);
+        items.append(item3);
+        items.append(item4);
+        items.append(item5);
+        items.append(item6);
+        items.append(item7);
+        items.append(item8);
+        items.append(item9);
+        mModel->appendRow(items);
+    }
+}
+
+void useritem::_TableInit()
+{
+    QTableView* t = ui->tableView;
+    t->setEditTriggers(QTreeView::NoEditTriggers);			//不能编辑
+    t->setSelectionBehavior(QTreeView::SelectRows);			//一次选中整行
+    t->setAlternatingRowColors(true);
+
+    QString strTreeStyle = "QTableView::item {height: 25px}";
+    t->setStyleSheet(strTreeStyle);
+
+    QStringList headers;
+    headers<< QStringLiteral("航班号")<<QStringLiteral("航空公司")
+            << QStringLiteral("区域")<<QStringLiteral("省份")
+            << QStringLiteral("城市")<<QStringLiteral("出发时间")
+            << QStringLiteral("飞机号")<<QStringLiteral("乘员定额")
+            << QStringLiteral("备注");
+    mModel = new QStandardItemModel(t);
+    mModel->setHorizontalHeaderLabels( headers );
+
+    _ModeInit();
+    t->setModel(mModel);
+    for(int i=0;i<headers.size();i++)
+    {
+        if(i==0)
+        {
+            t->horizontalHeader()->resizeSection(i,200);
+        }
+        else if(i==1)
+        {
+            t->horizontalHeader()->resizeSection(i,80);
+        }
+        else if(i>=2 && i<=4)
+        {
+            t->horizontalHeader()->resizeSection(i,60);
+        }
+        else
+        {
+            t->horizontalHeader()->resizeSection(i,150);
+        }
+    }
+
+    QModelIndex rootIndex = t->rootIndex();
+    QModelIndex selIndex = mModel->index(0,0,rootIndex);
+    t->setCurrentIndex(selIndex);
+//    t->expandAll();
+}
+
+void useritem::_AddSomeThing(Customer1 *item)
+{
+    mItems.push_back(item);
+}
+
+void useritem::_Todata()
+{
+    for(int i=0;i<mItems.size();i++)
+    {
+        Customer1* p = mItems[i];
+        if(p)
+        {
+            delete p;
+            p = NULL;
+        }
+    }
+    mItems.clear();
+}
+
+void useritem::_ToSQL(QString _Tofile)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(_Tofile);
+    if(db.open())
+    {
+        qDebug()<<"Database Opened";
+
+        mDefaultDB = _Tofile;
+
+        QSqlQuery sql_query;
+        QString select_all_sql = "select * from Customer1";
+        //查询所有记录
+        sql_query.prepare(select_all_sql);
+        if(!sql_query.exec())
+        {
+            qDebug()<<sql_query.lastError();
+        }
+        else
+        {
+            while(sql_query.next())
+            {
+                Customer1* p = new Customer1;
+                p->name = sql_query.value(0).toString();
+                p->type = sql_query.value(1).toInt();
+                p->area = sql_query.value(2).toInt();
+                p->province = sql_query.value(3).toInt();
+                p->city = sql_query.value(4).toString();
+                p->feijiihao = sql_query.value(5).toString();
+                p->site = sql_query.value(6).toString();
+                p->contact = sql_query.value(7).toString();
+                p->buy = sql_query.value(8).toString();
+                p->_airban = sql_query.value(9).toString();
+                p->_air = sql_query.value(10).toString();
+                mItems.push_back(p);
+            }
+        }
+    }
+    db.close();
+}
+
+void useritem::_SaveSQL(QString _Tofile)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(_Tofile);
+    if(db.open())
+    {
+        qDebug()<<"Database Opened";
+
+        QSqlQuery sql_query;
+        QString create_sql = "create table if not exists Customer1 (name varchar(100) primary key, \
+                                                    type int ,\
+                                                    area int,\
+                                                    province int,\
+                                                    city varchar(20),\
+                                                    feijiihao varchar(100),\
+                                                    site varchar(200),\
+                                                    contact varchar(500),\
+                                                    buy varchar(200),\
+                                                    _airban varchar(100),\
+                                                    _air varchar(200))"; //创建数据表
+//        QString insert_sql = "insert into Customer1 values(\"公司1\",1,1,1,\"武汉\",\"武汉洪山区XXX\",\"www.xxx.com\",\"aaaaa\",\"bbbbb\",\"ccccc\",\"ddddd\")";    //插入数据
+        QString insert_sql = "insert into Customer1 values(\"%1\",%2,%3,%4,\"%5\",\"%6\",\"%7\",\"%8\",\"%9\",\"%10\",\"%11\")";    //插入数据
+        QString select_all_sql = "select * from Customer1";
+
+        sql_query.prepare(create_sql); //创建表
+        if(!sql_query.exec()) //查看创建表是否成功
+        {
+            qDebug()<<QObject::tr("Table Create failed");
+            qDebug()<<sql_query.lastError();
+        }
+        else
+        {
+            qDebug()<< "Table Created" ;
+
+            for(int i=0;i<mItems.size();i++)
+            {
+                Customer1* p = mItems[i];
+                QString sql = insert_sql;
+                sql.replace("%10",p->_airban);
+                sql.replace("%11",p->_air);
+                sql = sql.arg(p->name).arg(p->type).arg(p->area).arg(p->province).arg(p->city).arg(p->feijiihao).arg(p->site).arg(p->contact).arg(p->buy);
+                sql_query.prepare(sql);
+                if(!sql_query.exec())
+                {
+                    qDebug()<<sql_query.lastError();
+                }
+                else
+                {
+                    qDebug()<<"插入记录成功";
+                }
+            }
+        }
+    }
+    db.close();
+}
+
+void useritem::_ToInsertSQL(Customer1 *p)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(mDefaultDB);
+    if(db.open())
+    {
+        qDebug()<<"Database Opened";
+
+        QSqlQuery sql_query;
+        QString create_sql = "create table if not exists Customer1 (name varchar(100) primary key, \
+                                                    type int ,\
+                                                    area int,\
+                                                    province int,\
+                                                    city varchar(20),\
+                                                    feijiihao varchar(100),\
+                                                    site varchar(200),\
+                                                    contact varchar(500),\
+                                                    buy varchar(200),\
+                                                    _airban varchar(100),\
+                                                    _air varchar(200))"; //创建数据表
+        sql_query.prepare(create_sql);
+        sql_query.exec();                   //创建表
+
+        QString sql = "insert into Customer1 values(\"%1\",%2,%3,%4,\"%5\",\"%6\",\"%7\",\"%8\",\"%9\",\"%10\",\"%11\")";    //插入数据
+        sql.replace("%10",p->_airban);
+        sql.replace("%11",p->_air);
+        sql = sql.arg(p->name).arg(p->type).arg(p->area).arg(p->province).arg(p->city).arg(p->feijiihao).arg(p->site).arg(p->contact).arg(p->buy);
+        sql_query.prepare(sql);
+        if(!sql_query.exec())
+        {
+            qDebug()<<sql_query.lastError();
+        }
+        else
+        {
+            qDebug()<<"插入记录成功";
+        }
+    }
+    db.close();
+}
+
+void useritem::_ToDeleteSQL(QString name)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(mDefaultDB);
+    if(db.open())
+    {
+        qDebug()<<"Database Opened";
+
+        QSqlQuery sql_query;
+        QString sql = QString("delete from Customer1 where name='%1'").arg(name);
+        sql_query.prepare(sql);
+        if(!sql_query.exec())
+        {
+            qDebug()<<sql_query.lastError();
+        }
+        else
+        {
+            qDebug()<<"删除记录成功";
+        }
+    }
+    db.close();
+}
+
+void useritem::_ToOpen(bool checked)
+{
+    QString _Tofile = QFileDialog::getOpen_Tofile(this,"打开文件","","Database Files(*.db)");
+    if (_Tofile.isNull())
+    {
+        return;
+    }
+    if(_Tofile.indexOf(".db") != -1)
+    {
+        _Todata();
+        _ToSQL(_Tofile);
+        _TableInit();
+    }
+}
+
+void useritem::_ToSave(bool checked)
+{
+    QString _Tofile = QFileDialog::getSave_Tofile(this,"保存到文件","","Database Files(*.db)");
+    if (_Tofile.isNull())
+    {
+        return;
+    }
+    if(QFile::exists(_Tofile))
+    {
+        QFile::remove(_Tofile);
+    }
+    _SaveSQL(_Tofile);
+}
+
+void useritem::on_btnSearch_clicked()
+{
+    QString s = ui->lineEdit->text();
+    mFilterKey = s;
+    _ModeInit();
+}
+
+
+void useritem::on_btnAdd_clicked()
+{
+    userticket dlg(NULL);
+    connect(&dlg,&userticket::sig_AddSomeThing,this,useritem::slot_AddSomeThing);
+    dlg.exec();
+}
+
+void useritem::on_btnDelete_clicked()
+{
+//    int row = ui->treeView->currentIndex().row();
+    int row = ui->tableView->currentIndex().row();
+    QString name = mModel->item(row,0)->text();
+    DeleteItem(name);
+
+    mModel->removeRow(row);
+
+    _ToDeleteSQL(name);
+}
+
+void useritem::slot_AddSomeThing(Customer1 *p)
+{
+    mItems.push_back(p);
+
+    QList<QStandardItem*> items;
+    QStandardItem* item1 = new QStandardItem(p->name);
+    QStandardItem* item2 = new QStandardItem(Type2String(p->type));
+    QStandardItem* item3 = new QStandardItem(Area2String(p->area));
+    QStandardItem* item4 = new QStandardItem(Province2String(p->province) );
+    QStandardItem* item5 = new QStandardItem(p->city);
+    QStandardItem* item6 = new QStandardItem(p->feijiihao);
+    QStandardItem* item7 = new QStandardItem(p->site);
+    QStandardItem* item8 = new QStandardItem(p->_airban);
+    QStandardItem* item9 = new QStandardItem(p->_air);
+    items.append(item1);
+    items.append(item2);
+    items.append(item3);
+    items.append(item4);
+    items.append(item5);
+    items.append(item6);
+    items.append(item7);
+    items.append(item8);
+    items.append(item9);
+    mModel->appendRow(items);
+
+    _ToInsertSQL(p);
+}
+
+QString useritem::Type2String(int n)
+{
+    return mAllType[n];
+}
+
+QString useritem::Area2String(int n)
+{
+    return mAllArea[n];
+}
+
+QString useritem::Province2String(int n)
+{
+    if(n>=0 && n<mAllProvince.size() )
+    {
+        return mAllProvince[n];
+    }
+    return "";
+}
+
+Customer1 *useritem::FindItem(QString name)
+{
+    for(int i=0;i<mItems.size();i++)
+    {
+        if(mItems[i]->name == name)
+        {
+            return mItems[i];
+        }
+    }
+    return NULL;
+}
+
+void useritem::DeleteItem(QString name)
+{
+    for(int i=0;i<mItems.size();i++)
+    {
+        if(mItems[i]->name == name)
+        {
+            mItems.removeAt(i);
+            return;
+        }
+    }
+}
+
+void useritem::on_comboBox_currentTextChanged(const QString &text)
+{
+    if(text == "航空公司")
+    {
+        mFilterType = "";
+    }
+    else
+    {
+        mFilterType = text;
+    }
+    _ModeInit();
+}
+
+void useritem::on_treeWidget_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+    QString s = current->text(0);
+    if(s == "全部")
+    {
+        mFilterArea = "";
+        mFilterProvince = "";
+    }
+    else if(mAllArea.contains(s))
+    {
+        //区域
+        mFilterArea = s;
+        mFilterProvince = "";
+    }
+    else if(mAllProvince.contains(s))
+    {
+        //省份
+        mFilterArea = "";
+        mFilterProvince = s;
+    }
+    _ModeInit();
+}
+
+void useritem::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    QString name = mModel->item(index.row(),0)->text();
+    Customer1 *p = FindItem(name);
+    if(p)
+    {
+        userticket dlg(p);
+        if(QDialog::Accepted == dlg.exec())
+        {
+            mModel->item(index.row(),0)->setText(p->name);
+            mModel->item(index.row(),1)->setText(Type2String(p->type));
+            mModel->item(index.row(),2)->setText(Area2String(p->area));
+            mModel->item(index.row(),3)->setText(Province2String(p->province));
+            mModel->item(index.row(),4)->setText(p->city);
+            mModel->item(index.row(),5)->setText(p->feijiihao);
+            mModel->item(index.row(),6)->setText(p->site);
+            mModel->item(index.row(),7)->setText(p->_airban);
+            mModel->item(index.row(),8)->setText(p->_air);
+
+            _ToDeleteSQL(name);
+            _ToInsertSQL(p);
+        }
+    }
+}
+
+void useritem::on_pushButton_clicked()
+{
+    LoginDialog *dlg = new LoginDialog;
+    dlg->show();
+    this->close();
+}
+
+userticket.cpp
+#include "userticket.h"
+#include "ui_userticket.h"
+
+userticket::userticket(Customer1* item,QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::userticket)
+{
+    ui->setupUi(this);
+
+    mItem = item;
+
+    QFont font( "Microsoft YaHei", 10, 75);
+    ui->labelTip->setFont(font);
+    ui->labelTip->setStyleSheet("QLabel{color:red;}");
+    ui->tableWidget->setRowCount(20);
+    for(int i=0;i<20;i++)
+    {
+        ui->tableWidget->setItem(i,0,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,1,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,2,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,3,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,4,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,5,new QTableWidgetItem(""));
+    }
+
+    on_combo2_currentTextChanged("华东");
+    if(mItem)
+    {
+        //修改
+        ui->btnAdd->setText("修改");
+
+        ui->edit1->setText(mItem->name);
+        ui->combo1->setCurrentIndex(mItem->type);
+        ui->combo2->setCurrentIndex(mItem->area);
+        on_combo2_currentTextChanged(ui->combo2->currentText());
+        ui->combo3->setCurrentText(Province2String(mItem->province));
+        ui->edit2->setText(mItem->city);
+        ui->edit3->setText(mItem->feijiihao);
+        ui->edit4->setText(mItem->site);
+        ui->textEdit->setText(mItem->buy);
+        ui->textEdit2->setText(mItem->_airban);
+        ui->textEdit3->setText(mItem->_air);
+
+        QStringList all = mItem->contact.split(";");
+        for(int i=0;i<all.size();i++)
+        {
+            QStringList row = all[i].split(",");
+            if(row.size() >= 6)
+            {
+                bool bRed = !row[5].isEmpty();
+                ui->tableWidget->item(i,0)->setText(row[0]);
+                ui->tableWidget->item(i,1)->setText(row[1]);
+                ui->tableWidget->item(i,2)->setText(row[2]);
+                ui->tableWidget->item(i,3)->setText(row[3]);
+                ui->tableWidget->item(i,4)->setText(row[4]);
+                ui->tableWidget->item(i,5)->setText(row[5]);
+                if(!row[5].isEmpty())
+                {
+                    ui->tableWidget->item(i,0)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,1)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,2)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,3)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,4)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,5)->setBackground(Qt::red);
+                }
+            }
+        }
+    }
+}
+
+userticket::~userticket()
+{
+    delete ui;
+}
+
+void userticket::on_btnAdd_clicked()
+{
+    if(ui->edit1->text().isEmpty())
+    {
+        ui->labelTip->setText("航班号名称不能为空!");
+        return;
+    }
+    Customer1* p = new Customer1;
+    p->name = ui->edit1->text();
+    p->type = ui->combo1->currentIndex();
+    p->area = ui->combo2->currentIndex();
+    p->province = String2Province(ui->combo3->currentText());
+    p->city = ui->edit2->text();
+    p->feijiihao = ui->edit3->text();
+    p->site = ui->edit4->text();
+    p->buy = ui->textEdit->toPlainText();
+    p->_airban = ui->textEdit2->toPlainText();
+    p->_air = ui->textEdit3->toPlainText();
+
+    QString sAll = "";
+    QString s = "";
+    int columns = ui->tableWidget->columnCount();
+    for(int i=0;i<ui->tableWidget->rowCount();i++)
+    {
+        if(ui->tableWidget->item(i,0)->text().isEmpty())
+        {
+            continue;
+        }
+        for(int j=0;j<columns;j++)
+        {
+            //,和;是用来分隔的标记，禁止用户输入这2个符号，如果不小心输了，程序也替换成空格
+            s = ui->tableWidget->item(i,j)->text();
+            s.replace(","," ");
+            s.replace(";"," ");
+            sAll += s;
+            if(j == columns-1)
+            {
+                sAll += ";";
+            }
+            else
+            {
+                sAll += ",";
+            }
+        }
+    }
+    p->contact = sAll;
+
+    if(mItem)
+    {
+        //修改
+/*
+        mItem->name = p->name;
+        mItem->type = p->type;
+        mItem->area = p->area;
+        mItem->province = p->province;
+        mItem->city = p->city;
+        mItem->feijiihao = p->feijiihao;
+        mItem->site = p->site;
+        mItem->contact = p->contact;
+        mItem->buy = p->buy;
+        mItem->_airban = p->_airban;
+        mItem->_air = p->_air;
+*/
+        mItem->contact = p->contact;
+        accept();
+    }
+    else
+    {
+        //新增
+        emit sig_AddSomeThing(p);
+
+        ui->edit1->setText("");
+        ui->edit2->setText("");
+        ui->edit3->setText("");
+        ui->edit4->setText("");
+        ui->textEdit->setText("");
+        ui->textEdit2->setText("");
+        ui->textEdit3->setText("");
+        for(int i=0;i<20;i++)
+        {
+            ui->tableWidget->item(i,0)->setText("");
+            ui->tableWidget->item(i,1)->setText("");
+            ui->tableWidget->item(i,2)->setText("");
+            ui->tableWidget->item(i,3)->setText("");
+            ui->tableWidget->item(i,4)->setText("");
+            ui->tableWidget->item(i,5)->setText("");
+        }
+        ui->edit1->setFocus();
+        ui->labelTip->setText("增加成功!");
+    }
+
+}
+
+void userticket::on_btnCancel_clicked()
+{
+    reject();
+}
+
+int userticket::String2Province(QString s)
+{
+    QStringList AllProvince;
+    AllProvince<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建"
+                <<"广东"<<"广西"<<"海南"
+                <<"湖北"<<"湖南"<<"河南"<<"江西"
+                <<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙"
+                <<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江";
+    return AllProvince.indexOf(s);
+}
+
+QString userticket::Province2String(int n)
+{
+    QStringList AllProvince;
+    AllProvince<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建"
+                <<"广东"<<"广西"<<"海南"
+                <<"湖北"<<"湖南"<<"河南"<<"江西"
+                <<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙"
+                <<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江";
+    if(n>=0 && n<AllProvince.size())
+    {
+        return AllProvince[n];
+    }
+    return "";
+}
+
+void userticket::on_combo2_currentTextChanged(const QString &text)
+{
+    ui->combo3->clear();
+    if(text == "华东")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建");
+    }
+    else if(text == "华南")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"广东"<<"广西"<<"海南");
+    }
+    else if(text == "华中")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"湖北"<<"湖南"<<"河南"<<"江西");
+    }
+    else if(text == "华北")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙");
+    }
+    else if(text == "其他")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江");
+    }
+}
+
+void userticket::on_edit1_textChanged(const QString &arg1)
+{
+    ui->labelTip->setText("");
+}
+/*************************************************************************/
+userticket.cpp
+#include "userticket.h"
+#include "ui_userticket.h"
+
+userticket::userticket(Customer1* item,QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::userticket)
+{
+    ui->setupUi(this);
+
+    mItem = item;
+
+    QFont font( "Microsoft YaHei", 10, 75);
+    ui->labelTip->setFont(font);
+    ui->labelTip->setStyleSheet("QLabel{color:red;}");
+    ui->tableWidget->setRowCount(20);
+    for(int i=0;i<20;i++)
+    {
+        ui->tableWidget->setItem(i,0,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,1,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,2,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,3,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,4,new QTableWidgetItem(""));
+        ui->tableWidget->setItem(i,5,new QTableWidgetItem(""));
+    }
+
+    on_combo2_currentTextChanged("华东");
+    if(mItem)
+    {
+        //修改
+        ui->btnAdd->setText("修改");
+
+        ui->edit1->setText(mItem->name);
+        ui->combo1->setCurrentIndex(mItem->type);
+        ui->combo2->setCurrentIndex(mItem->area);
+        on_combo2_currentTextChanged(ui->combo2->currentText());
+        ui->combo3->setCurrentText(Province2String(mItem->province));
+        ui->edit2->setText(mItem->city);
+        ui->edit3->setText(mItem->feijiihao);
+        ui->edit4->setText(mItem->site);
+        ui->textEdit->setText(mItem->buy);
+        ui->textEdit2->setText(mItem->_airban);
+        ui->textEdit3->setText(mItem->_air);
+
+        QStringList all = mItem->contact.split(";");
+        for(int i=0;i<all.size();i++)
+        {
+            QStringList row = all[i].split(",");
+            if(row.size() >= 6)
+            {
+                bool bRed = !row[5].isEmpty();
+                ui->tableWidget->item(i,0)->setText(row[0]);
+                ui->tableWidget->item(i,1)->setText(row[1]);
+                ui->tableWidget->item(i,2)->setText(row[2]);
+                ui->tableWidget->item(i,3)->setText(row[3]);
+                ui->tableWidget->item(i,4)->setText(row[4]);
+                ui->tableWidget->item(i,5)->setText(row[5]);
+                if(!row[5].isEmpty())
+                {
+                    ui->tableWidget->item(i,0)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,1)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,2)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,3)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,4)->setBackground(Qt::red);
+                    ui->tableWidget->item(i,5)->setBackground(Qt::red);
+                }
+            }
+        }
+    }
+}
+
+userticket::~userticket()
+{
+    delete ui;
+}
+
+void userticket::on_btnAdd_clicked()
+{
+    if(ui->edit1->text().isEmpty())
+    {
+        ui->labelTip->setText("航班号名称不能为空!");
+        return;
+    }
+    Customer1* p = new Customer1;
+    p->name = ui->edit1->text();
+    p->type = ui->combo1->currentIndex();
+    p->area = ui->combo2->currentIndex();
+    p->province = String2Province(ui->combo3->currentText());
+    p->city = ui->edit2->text();
+    p->feijiihao = ui->edit3->text();
+    p->site = ui->edit4->text();
+    p->buy = ui->textEdit->toPlainText();
+    p->_airban = ui->textEdit2->toPlainText();
+    p->_air = ui->textEdit3->toPlainText();
+
+    QString sAll = "";
+    QString s = "";
+    int columns = ui->tableWidget->columnCount();
+    for(int i=0;i<ui->tableWidget->rowCount();i++)
+    {
+        if(ui->tableWidget->item(i,0)->text().isEmpty())
+        {
+            continue;
+        }
+        for(int j=0;j<columns;j++)
+        {
+            //,和;是用来分隔的标记，禁止用户输入这2个符号，如果不小心输了，程序也替换成空格
+            s = ui->tableWidget->item(i,j)->text();
+            s.replace(","," ");
+            s.replace(";"," ");
+            sAll += s;
+            if(j == columns-1)
+            {
+                sAll += ";";
+            }
+            else
+            {
+                sAll += ",";
+            }
+        }
+    }
+    p->contact = sAll;
+
+    if(mItem)
+    {
+        //修改
+/*
+        mItem->name = p->name;
+        mItem->type = p->type;
+        mItem->area = p->area;
+        mItem->province = p->province;
+        mItem->city = p->city;
+        mItem->feijiihao = p->feijiihao;
+        mItem->site = p->site;
+        mItem->contact = p->contact;
+        mItem->buy = p->buy;
+        mItem->_airban = p->_airban;
+        mItem->_air = p->_air;
+*/
+        mItem->contact = p->contact;
+        accept();
+    }
+    else
+    {
+        //新增
+        emit sig_AddSomeThing(p);
+
+        ui->edit1->setText("");
+        ui->edit2->setText("");
+        ui->edit3->setText("");
+        ui->edit4->setText("");
+        ui->textEdit->setText("");
+        ui->textEdit2->setText("");
+        ui->textEdit3->setText("");
+        for(int i=0;i<20;i++)
+        {
+            ui->tableWidget->item(i,0)->setText("");
+            ui->tableWidget->item(i,1)->setText("");
+            ui->tableWidget->item(i,2)->setText("");
+            ui->tableWidget->item(i,3)->setText("");
+            ui->tableWidget->item(i,4)->setText("");
+            ui->tableWidget->item(i,5)->setText("");
+        }
+        ui->edit1->setFocus();
+        ui->labelTip->setText("增加成功!");
+    }
+
+}
+
+void userticket::on_btnCancel_clicked()
+{
+    reject();
+}
+
+int userticket::String2Province(QString s)
+{
+    QStringList AllProvince;
+    AllProvince<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建"
+                <<"广东"<<"广西"<<"海南"
+                <<"湖北"<<"湖南"<<"河南"<<"江西"
+                <<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙"
+                <<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江";
+    return AllProvince.indexOf(s);
+}
+
+QString userticket::Province2String(int n)
+{
+    QStringList AllProvince;
+    AllProvince<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建"
+                <<"广东"<<"广西"<<"海南"
+                <<"湖北"<<"湖南"<<"河南"<<"江西"
+                <<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙"
+                <<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江";
+    if(n>=0 && n<AllProvince.size())
+    {
+        return AllProvince[n];
+    }
+    return "";
+}
+
+void userticket::on_combo2_currentTextChanged(const QString &text)
+{
+    ui->combo3->clear();
+    if(text == "华东")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"山东"<<"浙江"<<"江苏"<<"安徽"<<"上海"<<"福建");
+    }
+    else if(text == "华南")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"广东"<<"广西"<<"海南");
+    }
+    else if(text == "华中")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"湖北"<<"湖南"<<"河南"<<"江西");
+    }
+    else if(text == "华北")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"北京"<<"天津"<<"河北"<<"山西"<<"内蒙");
+    }
+    else if(text == "其他")
+    {
+        ui->combo3->_AddSomeThings(QStringList()<<"宁夏"<<"新疆"<<"青海"<<"陕西"<<"甘肃"<<"四川"<<"云南"<<"贵州"<<"西藏"<<"重庆"<<"辽宁"<<"吉林"<<"黑龙江");
+    }
+}
+
+void userticket::on_edit1_textChanged(const QString &arg1)
+{
+    ui->labelTip->setText("");
+}
+
+
+
+/*************************************************************************/
+LinkList.h
+#ifndef KS_LINKLIST_H
+#define KS_LINKLIST_H
+
+#include<iostream>
+using namespace std;
+
+struct Node{
+    int data;
+    Node * pNext;
+};
+
+class LinkList
+{
+    private:
+        Node *PHead;
+    public:
+        LinkList(){
+            PHead = new Node;
+            PHead->pNext = NULL;
+        }//构造函数
+        ~LinkList(){
+            delete PHead;
+        }//析构函数
+        void create(int n);//按顺序插入
+        //void create2(int n);//头部插入
+        int Delete(int pos);//删除
+        void print();
+        void insert(int pos,int value);
+        void sort_list(int len);
+        bool Is_Empty(){//判断是否为空链表
+            return (PHead->pNext==NULL);
+        }
+};
+
+void LinkList::create(int n)
+{
+    Node *p, *q;
+    q = PHead;
+    for(int i=0; i<n; i++){
+        p = new Node;
+        cin>>p->data;
+        q->pNext = p;
+        q = p;
+    }
+    q->pNext = NULL;
+}
+/*
+头部插入
+void LinkList::create(int n)
+{
+    Node *p;
+    for(int i=n; i>0; i--){
+        p = new Node;
+        cin>>p->data;
+        p->pNext = PHead->pNext;
+        PHead->pNext = p;
+    }
+}
+*/
+void LinkList::insert(int pos,int value)
+{
+    Node *p = PHead;
+    int len = 0;
+    while(p && len<pos-1){
+        p = p->pNext;
+        len++;
+    }
+    if(!p || len>pos-1){
+        cout<<"第"<<pos-1<<"个元素不存在！"<<endl;
+        exit(0);
+    }
+    Node *s = new Node;
+    if(!s){
+        cout<<"空间分配失败！"<<endl;
+        exit(0);
+    }
+    s->data = value;
+    s->pNext = p->pNext;
+    p->pNext = s;
+}
+
+
+int LinkList::Delete(int pos)
+{
+    Node *p = PHead;
+    int len = 0;
+    while(p && len<pos-1){
+        p = p->pNext;
+        len++;
+    }
+    if(!p || p->pNext==NULL){
+        cout<<"删除位置不存在！"<<endl;
+        exit(0);
+    }
+    Node *q = p->pNext;
+    p->pNext = q->pNext;
+    int d = q->data;
+    delete q;
+    return d;
+}
+
+void LinkList::print()
+{
+    Node *p;
+    p = PHead->pNext;
+    while(p != NULL){
+        cout<<p->data<<" ";
+        p = p->pNext;
+    }
+    cout<<endl;
+}
+
+void LinkList::sort_list(int len)
+{
+    Node *p, *q;
+    int i, j, t;
+    for( i=0,p=PHead->pNext; i<len-1; ++i,p=p->pNext){
+        for(j=i+1,q=p->pNext; j<len; ++j,q=q->pNext){
+            if(p->data < q->data){
+                t = p->data;
+                p->data = q->data;
+                q->data = t;
+            }
+        }
+    }
+
+}
+
+//*******************************************************
+/*
+int main()
+{
+    LinkList L;
+    int len,value,pos;
+    cout<<"请输入链表长度：";
+    cin>>len;
+    cout<<"请输入链表元素的值：";
+    L.create(len);
+    cout<<"输出链表元素：";
+    L.print();
+    cout<<"对链表进行递减排序：";
+    L.sort_list(len);
+    L.print();
+    cout<<"请选择删除元素位置：";
+    cin>>pos;
+    L.Delete(pos);
+    cout<<"删除后：";
+    L.print();
+    cout<<"请选择插入元素位置和值：";
+    cin>>pos>>value;
+    L.insert(pos,value);
+    cout<<"插入后：";
+    L.print();
+
+    return 0;
+}
+
+*/
+
+#endif // KS_LINKLIST_H
+
+
+/*************************************************************************/
+顺序存储
+#ifndef KS_QUEUE_H
+#define KS_QUEUE_H
+
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+//顺序存储
+template<typename T>
+class Queue
+{
+    private:
+        T *Queue_space;
+        int Capacity;
+        int QueueLen;
+        //Queue Q;
+
+    public:
+        ~Queue();//析构函数
+        Queue(int Capacity);//构造函数
+        int Push(T item);//压入元素
+        T Pop();//从头部弹出元素
+        int print();
+        int GetQueueNum();	//获取元素个数
+        int ClearQueue(); 	//清空队列
+};
+
+//构造函数
+template<typename T>
+Queue<T>::Queue(int Capacity)
+{
+    this->Queue_space = new T[Capacity];
+    if( this->Queue_space == NULL){
+        cout<<"创建队列失败！"<<endl;
+    }else{
+        this->Capacity = Capacity;
+        this->QueueLen = 0;
+    }
+}
+//析构函数
+template<typename T>
+Queue<T>::~Queue()
+{
+    if(this->Queue_space != NULL){
+        delete[] this->Queue_space;
+    }
+    this->QueueLen = 0;
+    this->Capacity = 0;
+}
+
+//获取元素个数
+template<typename T>
+int Queue<T>::GetQueueNum()
+{
+    int ret=0;
+    int len=0;
+    if(this->Queue_space == NULL){
+        cout << "空间尚未建立！--GetQueueNum"<<endl;
+        ret = -1;
+        return ret;
+    }
+    //转换数据类型
+    return this->QueueLen;
+}
+
+//入队
+template<typename T>
+int Queue<T>::Push(T item)
+{
+    int ret=0;
+    if(this->Queue_space == NULL){
+        cout << "空间尚未建立！--Push"<<endl;
+        ret = -1;
+        return ret;
+    }
+    int len = GetQueueNum();
+    if(len < 0){
+        cout<<"队列长度为负！ --Push"<<endl;
+        ret = -1;
+        return ret;
+    }
+    if(len >= this->Capacity){
+        cout<<"队列已满！ --Push"<<endl;
+        ret = -1;
+        return ret;
+    }
+    this->Queue_space[len] = item;
+    this->QueueLen++;
+    return ret;
+}
+
+//头部弹出元素
+template<typename T>
+T Queue<T>::Pop()
+{
+    T Pop_item;
+    int ret=0;
+    if(this->Queue_space == NULL){
+        cout << "空间尚未建立！--Push"<<endl;
+        ret = -1;
+        return ret;
+    }
+    int len = GetQueueNum();
+    if(len <= 0){
+        cout<<"队列长度为空！ --Push"<<endl;
+        ret = -1;
+        return ret;
+    }
+    this->QueueLen--;
+    Pop_item = this->Queue_space[0];
+    //从后向前依次移动一位
+    T t;
+    for(int i=0; i<len-1; i++){
+        t = this->Queue_space[i+1];
+        this->Queue_space[i] = t;
+    }
+
+    return Pop_item;
+}
+
+//输出
+template<typename T>
+int Queue<T>::print()
+{
+    int ret=0;
+    if(this->Queue_space == NULL){
+        cout << "空间尚未建立！--Print"<<endl;
+        ret = -1;
+        return ret;
+    }
+    int len = GetQueueNum();
+    if(len <= 0){
+        cout<<"队列长度为空！ --Print"<<endl;
+        ret = -1;
+        return ret;
+    }
+    for(int i=0; i<len; i++){
+        cout<<this->Queue_space[i]<<" ";
+    }
+    return ret;
+}
+
+template<typename T>
+int Queue<T>::ClearQueue()
+{
+    int ret=0;
+    int len=0;
+    if(this->Queue_space == NULL){
+        cout<<"空间尚未建立！  --ClearQueue"<<endl;
+        ret = -1;
+        return ret;
+    }
+    //数据类型转换
+    memset(this->Queue_space, 0, sizeof(this->Queue_space));
+    this->QueueLen = 0;
+    cout<<"清空完成！  --ClearQueue"<<endl;
+    return ret;
+}
+//=======================================
+/*
+int main()
+{
+    Queue<int> Q(5);
+    int a[] = {1,2,3,4,5,6,7,8,9,10,11,12 };
+    int ret = 0;
+    int data;
+    int capacity,value;
+
+    //cout<<"请输入队列容量："<<endl;
+    //cin>>capacity;
+    //ret = Q.Queue(capacity);
+    cout<<"请输入入队元素："<<endl;
+    for(int i=0; i<capacity; i++){
+        cin>>value;
+        ret = Q.Push(value);
+    }
+
+    for(int i=0; i<capacity; i++){
+        data = Q.Pop();
+    }
+
+
+    for(int i=0; i<5; i++){
+        ret = Q.Push(a[i]);
+    }
+    cout<<endl;
+    cout<<"入队后，队列中为："<<endl;
+    Q.print();
+    for(int i=0; i<2; i++){
+        data = Q.Pop();
+    }
+    cout<<endl;
+    cout<<"出队后，队列中为："<<endl;
+    Q.print();
+    Q.ClearQueue();
+    Q.print();
+
+    return 0;
+}
+*/
+
+
+
+#endif // KS_QUEUE_H
+
+
+/***********************************************************************/
+链表存储
+#ifndef KS_QUEUE_2_H
+#define KS_QUEUE_2_H
+
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+//顺序存储
+template<typename T>
+class Queue2
+{
+    private:
+        T *Queue_space;
+        int Capacity;
+        int front;
+        int rear;
+        //Queue Q;
+
+    public:
+        ~Queue2();//析构函数
+        Queue2(int Capacity);//构造函数
+        int Insert(T item);//压入元素
+        int DeleteQueue(int *dQ);//从头部弹出元素
+        int print();
+        int ClearQueue(); 	//清空队列
+        bool Is_empty();
+};
+
+//构造函数
+template<typename T>
+Queue2<T>::Queue2(int Capacity)
+{
+    this->Queue_space = new T[Capacity];
+    if( this->Queue_space == NULL){
+        cout<<"创建队列失败！"<<endl;
+    }else{
+        this->front = this->rear = 0;
+        this->Capacity = Capacity;
+    }
+}
+//析构函数
+template<typename T>
+Queue2<T>::~Queue2()
+{
+    if(this->Queue_space != NULL){
+        delete[] this->Queue_space;
+    }
+    this->front = this->rear = 0;
+    this->Capacity = 0;
+}
+
+//判断队列是否满
+template<typename T>
+bool Queue2<T>::Is_empty()
+{
+    if(this->front==this->rear)
+        return true;
+    return false;
+}
+
+//入队
+template<typename T>
+int Queue2<T>::Insert(T item)
+{
+    int ret=0;
+    if(this->Queue_space == NULL){
+        cout << "空间尚未建立！--Push_2"<<endl;
+        ret = -1;
+        return ret;
+    }
+
+    if((rear+1) % Capacity == front){
+        cout<<"队列已满！ --Push_2"<<endl;
+        ret = -1;
+        return ret;
+    }
+    this->Queue_space[rear%Capacity] = item;
+    this->rear = (this->rear+1)%Capacity;
+    return ret;
+}
+
+//头部弹出元素
+template<typename T>
+int Queue2<T>::DeleteQueue(int *dQ)
+{
+    int ret=0;
+    if(this->Queue_space == NULL){
+        cout << "空间尚未建立！--delete_2"<<endl;
+        ret = -1;
+        return ret;
+    }
+    if(Is_empty()){
+        cout<<"队列长度为空！ --delete_2"<<endl;
+        ret = -1;
+        return ret;
+    }
+    *dQ = this->Queue_space[this->front];
+    this->front = (this->front+1) % Capacity;
+
+    return ret;
+}
+
+//输出
+template<typename T>
+int Queue2<T>::print()
+{
+    int ret=0;
+    if(this->Queue_space == NULL){
+        cout << "空间尚未建立！--Print_2"<<endl;
+        ret = -1;
+        return ret;
+    }
+    if(Is_empty()){
+        cout<<"队列长度为空！ --Print_2"<<endl;
+        ret = -1;
+        return ret;
+    }
+    int p=front;
+    int q=rear;
+    while(p%Capacity != q){
+        cout<<Queue_space[p]<<" ";
+        p = (p+1)%Capacity;
+    }
+    return ret;
+}
+
+template<typename T>
+int Queue2<T>::ClearQueue()
+{
+    int ret=0;
+    if(this->Queue_space == NULL){
+        cout<<"空间尚未建立！  --ClearQueue_2"<<endl;
+        ret = -1;
+        return ret;
+    }
+    int p=front;
+    int q=rear;
+    //数据类型转换
+    while(p%Capacity != q){
+        Queue_space[p]=0;
+        p = (p+1)%Capacity;
+    }
+    cout<<"清空完成！  --ClearQueue_2"<<endl;
+    return ret;
+}
+//=======================================
+/*
+int main()
+{
+    Queue<int> Q(6);
+    int a[] = {1,2,3,4,5,6,7,8,9,10,11,12 };
+    int ret = 0;
+    int data;
+    /*
+    //cout<<"请输入队列容量："<<endl;
+    //cin>>capacity;
+    //ret = Q.Queue(capacity);
+    cout<<"请输入入队元素："<<endl;
+    for(int i=0; i<capacity; i++){
+        cin>>value;
+        ret = Q.Push(value);
+    }
+
+    for(int i=0; i<capacity; i++){
+        data = Q.Pop();
+    }
+    */
+    /*
+    for(int i=0; i<5; i++){
+        ret = Q.Insert(a[i]);
+    }
+    cout<<endl;
+    cout<<"入队后，队列中为："<<endl;
+    Q.print();
+    for(int i=0; i<2; i++){
+        Q.DeleteQueue(&a[i]);
+    }
+    cout<<endl;
+    cout<<"出队后，队列中为："<<endl;
+    Q.print();
+    Q.ClearQueue();
+    Q.print();
+
+    return 0;
+}
+*/
+
+
+
+
+#endif // KS_QUEUE_2_H
+
+
