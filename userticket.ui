@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>userticket</class>
+ <widget class="QDialog" name="userticket">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>728</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>编辑航班信息</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>航班号：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="edit1">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>单位类型航空公司</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="combo1">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>国际航空</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>南方航空</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>海南航空</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>长沙航空</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>深圳航空</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>东方航空</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>厦门航空</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>四川航空</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>区域：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="combo2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>华东</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>华南</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>华中</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>华北</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>其他</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>外</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>省份：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="combo3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>山东</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>浙江</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>江苏</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>安徽</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>上海</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>福建</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>湖北</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>湖南</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>河南</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>江西</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>北京</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>天津</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>河北</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>山西</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>内蒙</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>广东</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>广西</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>海南</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>宁夏</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>新疆</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>青海</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>陕西</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>甘肃</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>四川</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>云南</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>贵州</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>西藏</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>重庆</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>辽宁</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>吉林</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>黑龙江</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>城市：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="edit2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>出发时间：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="edit3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>飞机号：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="edit4">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>机长联系方式：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QTextEdit" name="textEdit"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>乘员定额：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QTextEdit" name="textEdit2"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>备注：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QTextEdit" name="textEdit3"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>联系方式：</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>350</height>
+      </size>
+     </property>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>150</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>100</number>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <row>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>4</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>5</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>6</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>7</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>8</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>9</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>10</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>11</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>12</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>13</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>14</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>15</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>16</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>17</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>18</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>19</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>20</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>联系人</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>购票量</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>电话</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>邮箱</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>舱位</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>可能过时</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="labelTip">
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAdd">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>增加</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>取消</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
